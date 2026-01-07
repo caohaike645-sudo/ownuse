@@ -1,249 +1,249 @@
-!DOCTYPE html
-html lang=zh-Hant
-head
-    meta charset=UTF-8
-    meta name=viewport content=width=device-width, initial-scale=1.0
-    titleFF14 狩獵進度追蹤器title
-    style
-        root { --primary #e0c068; --bg #1a1a1a; --text #eee; --sub-btn #444; }
-        body { font-family Microsoft JhengHei, sans-serif; background var(--bg); color var(--text); padding 15px; line-height 1.4; max-width 600px; margin auto; }
-        h1 { text-align center; color var(--primary); font-size 1.5em; margin-bottom 15px; }
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF14 狩獵進度追蹤器</title>
+    <style>
+        :root { --primary: #e0c068; --bg: #1a1a1a; --text: #eee; --sub-btn: #444; }
+        body { font-family: "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); padding: 15px; line-height: 1.4; max-width: 600px; margin: auto; }
+        h1 { text-align: center; color: var(--primary); font-size: 1.5em; margin-bottom: 15px; }
         
-        .tab-container, .sub-tab-container { display flex; justify-content center; gap 5px; margin-bottom 10px; flex-wrap wrap; }
-        button { background #333; color white; border 1px solid var(--primary); padding 6px 12px; cursor pointer; border-radius 4px; font-size 0.9em; }
-        button.active { background var(--primary); color black; font-weight bold; }
-        .sub-tab-container button { background var(--sub-btn); border 1px solid #666; }
+        .tab-container, .sub-tab-container { display: flex; justify-content: center; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
+        button { background: #333; color: white; border: 1px solid var(--primary); padding: 6px 12px; cursor: pointer; border-radius: 4px; font-size: 0.9em; }
+        button.active { background: var(--primary); color: black; font-weight: bold; }
+        .sub-tab-container button { background: var(--sub-btn); border: 1px solid #666; }
 
-        .hunt-section, .sub-section { display none; }
-        .active { display block; }
+        .hunt-section, .sub-section { display: none; }
+        .active { display: block; }
 
-        .zone-card { background #2a2a2a; border-radius 6px; padding 10px; margin-bottom 15px; }
-        h3 { margin 10px 0 5px 0; color var(--primary); font-size 1.1em; border-left 3px solid var(--primary); padding-left 8px; }
-        h3first-child { margin-top 0; }
+        .zone-card { background: #2a2a2a; border-radius: 6px; padding: 10px; margin-bottom: 15px; }
+        h3 { margin: 10px 0 5px 0; color: var(--primary); font-size: 1.1em; border-left: 3px solid var(--primary); padding-left: 8px; }
+        h3:first-child { margin-top: 0; }
         
-        .monster-row { display flex; align-items center; padding 4px 0; border-bottom 1px solid #383838; }
-        .monster-rowlast-child { border-bottom none; }
-        .rank { font-weight bold; margin-right 8px; width 25px; text-align center; font-size 0.9em; }
-        .rank-S { color #ff4d4d; }
-        .rank-A { color #ffad33; }
-        .rank-B { color #33adff; }
+        .monster-row { display: flex; align-items: center; padding: 4px 0; border-bottom: 1px solid #383838; }
+        .monster-row:last-child { border-bottom: none; }
+        .rank { font-weight: bold; margin-right: 8px; width: 25px; text-align: center; font-size: 0.9em; }
+        .rank-S { color: #ff4d4d; }
+        .rank-A { color: #ffad33; }
+        .rank-B { color: #33adff; }
         
-        input[type=checkbox] { transform scale(1.2); margin-right 10px; cursor pointer; }
-        label { cursor pointer; flex-grow 1; font-size 1em; }
-    style
-head
-body
+        input[type="checkbox"] { transform: scale(1.2); margin-right: 10px; cursor: pointer; }
+        label { cursor: pointer; flex-grow: 1; font-size: 1em; }
+    </style>
+</head>
+<body>
 
-    h1FF14 狩獵進度追蹤h1
+    <h1>FF14 狩獵進度追蹤</h1>
 
-    div class=tab-container
-        button onclick=showVer('v2') id=btn-v2 class=active2.0button
-        button onclick=showVer('v3') id=btn-v33.0button
-        button onclick=showVer('v4') id=btn-v44.0button
-    div
+    <div class="tab-container">
+        <button onclick="showVer('v2')" id="btn-v2" class="active">2.0</button>
+        <button onclick="showVer('v3')" id="btn-v3">3.0</button>
+        <button onclick="showVer('v4')" id="btn-v4">4.0</button>
+    </div>
 
-    div id=v2 class=hunt-section active
-        div class=sub-tab-container
-            button onclick=showSub('v2-la') id=btn-v2-la class=active拉諾西亞button
-            button onclick=showSub('v2-sh') id=btn-v2-sh黑衣森林button
-            button onclick=showSub('v2-th') id=btn-v2-th薩納蘭button
-            button onclick=showSub('v2-ot') id=btn-v2-ot其他button
-        div
+    <div id="v2" class="hunt-section active">
+        <div class="sub-tab-container">
+            <button onclick="showSub('v2-la')" id="btn-v2-la" class="active">拉諾西亞</button>
+            <button onclick="showSub('v2-sh')" id="btn-v2-sh">黑衣森林</button>
+            <button onclick="showSub('v2-th')" id="btn-v2-th">薩納蘭</button>
+            <button onclick="showSub('v2-ot')" id="btn-v2-ot">其他</button>
+        </div>
 
-        div id=v2-la class=sub-section active
-            div class=zone-card
-                h3中拉諾西亞h3
-                div class=monster-rowinput type=checkbox id=v2-la-1blabel for=v2-la-1bspan class=rank rank-BBspan 花林女郎labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-1alabel for=v2-la-1aspan class=rank rank-AAspan 醜男子沃迦加labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-1slabel for=v2-la-1sspan class=rank rank-SSspan 護土精靈labeldiv
-                h3拉諾西亞低地h3
-                div class=monster-rowinput type=checkbox id=v2-la-2blabel for=v2-la-2bspan class=rank rank-BBspan 寬耳兇蝠labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-2alabel for=v2-la-2aspan class=rank rank-AAspan 烏克提希labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-2slabel for=v2-la-2sspan class=rank rank-SSspan 凱羅葛洛斯labeldiv
-                h3東拉諾西亞h3
-                div class=monster-rowinput type=checkbox id=v2-la-3blabel for=v2-la-3bspan class=rank rank-BBspan 血腥瑪麗labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-3alabel for=v2-la-3aspan class=rank rank-AAspan 魔導地獄爪labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-3slabel for=v2-la-3sspan class=rank rank-SSspan 伽洛克labeldiv
-                h3西拉諾西亞h3
-                div class=monster-rowinput type=checkbox id=v2-la-4blabel for=v2-la-4bspan class=rank rank-BBspan 暗盔魔蟹labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-4alabel for=v2-la-4aspan class=rank rank-AAspan 納恩labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-4slabel for=v2-la-4sspan class=rank rank-SSspan 火憤牛labeldiv
-                h3拉諾西亞高地h3
-                div class=monster-rowinput type=checkbox id=v2-la-4blabel for=v2-la-4bspan class=rank rank-BBspan 米臘德羅斯蜂鳥labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-4alabel for=v2-la-4aspan class=rank rank-AAspan 瑪貝利labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-4slabel for=v2-la-4sspan class=rank rank-SSspan 南迪labeldiv
-                h3拉諾西亞外地h3
-                div class=monster-rowinput type=checkbox id=v2-la-4blabel for=v2-la-4bspan class=rank rank-BBspan 巫刻獵鷲labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-4alabel for=v2-la-4aspan class=rank rank-AAspan 角祖labeldiv
-                div class=monster-rowinput type=checkbox id=v2-la-4slabel for=v2-la-4sspan class=rank rank-SSspan 牛頭黑神labeldiv
-            div
-        div
+        <div id="v2-la" class="sub-section active">
+            <div class="zone-card">
+                <h3>中拉諾西亞</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-la-1b"><label for="v2-la-1b"><span class="rank rank-B">B</span> 花林女郎</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-1a"><label for="v2-la-1a"><span class="rank rank-A">A</span> 醜男子沃迦加</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-1s"><label for="v2-la-1s"><span class="rank rank-S">S</span> 護土精靈</label></div>
+                <h3>拉諾西亞低地</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-la-2b"><label for="v2-la-2b"><span class="rank rank-B">B</span> 寬耳兇蝠</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-2a"><label for="v2-la-2a"><span class="rank rank-A">A</span> 烏克提希</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-2s"><label for="v2-la-2s"><span class="rank rank-S">S</span> 凱羅葛洛斯</label></div>
+                <h3>東拉諾西亞</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-la-3b"><label for="v2-la-3b"><span class="rank rank-B">B</span> 血腥瑪麗</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-3a"><label for="v2-la-3a"><span class="rank rank-A">A</span> 魔導地獄爪</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-3s"><label for="v2-la-3s"><span class="rank rank-S">S</span> 伽洛克</label></div>
+                <h3>西拉諾西亞</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4b"><label for="v2-la-4b"><span class="rank rank-B">B</span> 暗盔魔蟹</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4a"><label for="v2-la-4a"><span class="rank rank-A">A</span> 納恩</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4s"><label for="v2-la-4s"><span class="rank rank-S">S</span> 火憤牛</label></div>
+                <h3>拉諾西亞高地</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4b"><label for="v2-la-4b"><span class="rank rank-B">B</span> 米臘德羅斯蜂鳥</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4a"><label for="v2-la-4a"><span class="rank rank-A">A</span> 瑪貝利</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4s"><label for="v2-la-4s"><span class="rank rank-S">S</span> 南迪</label></div>
+                <h3>拉諾西亞外地</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4b"><label for="v2-la-4b"><span class="rank rank-B">B</span> 巫刻獵鷲</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4a"><label for="v2-la-4a"><span class="rank rank-A">A</span> 角祖</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-la-4s"><label for="v2-la-4s"><span class="rank rank-S">S</span> 牛頭黑神</label></div>
+            </div>
+        </div>
 
-        div id=v2-sh class=sub-section
-            div class=zone-card
-                h3黑衣森林中央林區h3
-                div class=monster-rowinput type=checkbox id=v2-sh-1blabel for=v2-sh-1bspan class=rank rank-BBspan 白鬼鼠王labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-1alabel for=v2-sh-1aspan class=rank rank-AAspan 弗內烏斯labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-1slabel for=v2-sh-1sspan class=rank rank-SSspan 雷德羅巨蛇labeldiv
-                h3黑衣森林東部林區h3
-                div class=monster-rowinput type=checkbox id=v2-sh-2blabel for=v2-sh-2bspan class=rank rank-BBspan 擊刺魔蜂蘇菲labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-2alabel for=v2-sh-2aspan class=rank rank-AAspan 千眼凝膠labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-2slabel for=v2-sh-2sspan class=rank rank-SSspan 烏爾伽魯labeldiv
-                h3黑衣森林南部林區h3
-                div class=monster-rowinput type=checkbox id=v2-sh-2blabel for=v2-sh-2bspan class=rank rank-BBspan 君王鬼蜻蜓labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-2alabel for=v2-sh-2aspan class=rank rank-AAspan 蓋得labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-2slabel for=v2-sh-2sspan class=rank rank-SSspan 精神吸取者labeldiv
-                h3黑衣森林北部林區h3
-                div class=monster-rowinput type=checkbox id=v2-sh-2blabel for=v2-sh-2bspan class=rank rank-BBspan 天璣巨熊labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-2alabel for=v2-sh-2aspan class=rank rank-AAspan 尾宿蛛蠍labeldiv
-                div class=monster-rowinput type=checkbox id=v2-sh-2slabel for=v2-sh-2sspan class=rank rank-SSspan 千竿口花希達labeldiv
-            div
-        div
+        <div id="v2-sh" class="sub-section">
+            <div class="zone-card">
+                <h3>黑衣森林中央林區</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-1b"><label for="v2-sh-1b"><span class="rank rank-B">B</span> 白鬼鼠王</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-1a"><label for="v2-sh-1a"><span class="rank rank-A">A</span> 弗內烏斯</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-1s"><label for="v2-sh-1s"><span class="rank rank-S">S</span> 雷德羅巨蛇</label></div>
+                <h3>黑衣森林東部林區</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2b"><label for="v2-sh-2b"><span class="rank rank-B">B</span> 擊刺魔蜂蘇菲</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2a"><label for="v2-sh-2a"><span class="rank rank-A">A</span> 千眼凝膠</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2s"><label for="v2-sh-2s"><span class="rank rank-S">S</span> 烏爾伽魯</label></div>
+                <h3>黑衣森林南部林區</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2b"><label for="v2-sh-2b"><span class="rank rank-B">B</span> 君王鬼蜻蜓</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2a"><label for="v2-sh-2a"><span class="rank rank-A">A</span> 蓋得</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2s"><label for="v2-sh-2s"><span class="rank rank-S">S</span> 精神吸取者</label></div>
+                <h3>黑衣森林北部林區</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2b"><label for="v2-sh-2b"><span class="rank rank-B">B</span> 天璣巨熊</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2a"><label for="v2-sh-2a"><span class="rank rank-A">A</span> 尾宿蛛蠍</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-sh-2s"><label for="v2-sh-2s"><span class="rank rank-S">S</span> 千竿口花希達</label></div>
+            </div>
+        </div>
 
-        div id=v2-th class=sub-section
-            div class=zone-card
-                h3西薩納蘭h3
-                div class=monster-rowinput type=checkbox id=v2-th-1blabel for=v2-th-1bspan class=rank rank-BBspan 陰溝毒液labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1alabel for=v2-th-1aspan class=rank rank-AAspan 阿列刻特利昂labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1slabel for=v2-th-1sspan class=rank rank-SSspan 虛無探索者labeldiv
-                h3中薩納蘭h3
-                div class=monster-rowinput type=checkbox id=v2-th-1blabel for=v2-th-1bspan class=rank rank-BBspan 奧弗傑恩labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1alabel for=v2-th-1aspan class=rank rank-AAspan 花舞仙人刺labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1slabel for=v2-th-1sspan class=rank rank-SSspan 布隆特斯labeldiv
-                h3東薩納蘭h3
-                div class=monster-rowinput type=checkbox id=v2-th-1blabel for=v2-th-1bspan class=rank rank-BBspan 加特林針鼴labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1alabel for=v2-th-1aspan class=rank rank-AAspan 瑪赫斯labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1slabel for=v2-th-1sspan class=rank rank-SSspan 巴拉烏爾labeldiv
-                h3南薩納蘭h3
-                div class=monster-rowinput type=checkbox id=v2-th-1blabel for=v2-th-1bspan class=rank rank-BBspan 死灰復燃的阿爾賓labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1alabel for=v2-th-1aspan class=rank rank-AAspan 札尼戈labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1slabel for=v2-th-1sspan class=rank rank-SSspan 努紐努維labeldiv
-                h3北薩納蘭h3
-                div class=monster-rowinput type=checkbox id=v2-th-1blabel for=v2-th-1bspan class=rank rank-BBspan 永恆不滅的菲蘭德副耀士labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1alabel for=v2-th-1aspan class=rank rank-AAspan 菲蘭德的遺火labeldiv
-                div class=monster-rowinput type=checkbox id=v2-th-1slabel for=v2-th-1sspan class=rank rank-SSspan 蚓蠑螈巨蟲labeldiv
-            div
-        div
+        <div id="v2-th" class="sub-section">
+            <div class="zone-card">
+                <h3>西薩納蘭</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1b"><label for="v2-th-1b"><span class="rank rank-B">B</span> 陰溝毒液</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1a"><label for="v2-th-1a"><span class="rank rank-A">A</span> 阿列刻特利昂</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1s"><label for="v2-th-1s"><span class="rank rank-S">S</span> 虛無探索者</label></div>
+                <h3>中薩納蘭</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1b"><label for="v2-th-1b"><span class="rank rank-B">B</span> 奧弗傑恩</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1a"><label for="v2-th-1a"><span class="rank rank-A">A</span> 花舞仙人刺</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1s"><label for="v2-th-1s"><span class="rank rank-S">S</span> 布隆特斯</label></div>
+                <h3>東薩納蘭</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1b"><label for="v2-th-1b"><span class="rank rank-B">B</span> 加特林針鼴</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1a"><label for="v2-th-1a"><span class="rank rank-A">A</span> 瑪赫斯</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1s"><label for="v2-th-1s"><span class="rank rank-S">S</span> 巴拉烏爾</label></div>
+                <h3>南薩納蘭</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1b"><label for="v2-th-1b"><span class="rank rank-B">B</span> 死灰復燃的阿爾賓</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1a"><label for="v2-th-1a"><span class="rank rank-A">A</span> 札尼戈</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1s"><label for="v2-th-1s"><span class="rank rank-S">S</span> 努紐努維</label></div>
+                <h3>北薩納蘭</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1b"><label for="v2-th-1b"><span class="rank rank-B">B</span> 永恆不滅的菲蘭德副耀士</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1a"><label for="v2-th-1a"><span class="rank rank-A">A</span> 菲蘭德的遺火</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-th-1s"><label for="v2-th-1s"><span class="rank rank-S">S</span> 蚓蠑螈巨蟲</label></div>
+            </div>
+        </div>
 
-        div id=v2-ot class=sub-section
-            div class=zone-card
-                h3摩杜納h3
-                div class=monster-rowinput type=checkbox id=v2-md-blabel for=v2-md-bspan class=rank rank-BBspan 水蛭王labeldiv
-                div class=monster-rowinput type=checkbox id=v2-md-alabel for=v2-md-aspan class=rank rank-AAspan 庫雷亞labeldiv
-                div class=monster-rowinput type=checkbox id=v2-md-slabel for=v2-md-sspan class=rank rank-SSspan 阿格里帕labeldiv
-                h3庫爾札斯中央高地h3
-                div class=monster-rowinput type=checkbox id=v2-ch-blabel for=v2-ch-bspan class=rank rank-BBspan 納烏爾labeldiv
-                div class=monster-rowinput type=checkbox id=v2-ch-alabel for=v2-ch-aspan class=rank rank-AAspan 馬拉克labeldiv
-                div class=monster-rowinput type=checkbox id=v2-ch-slabel for=v2-ch-sspan class=rank rank-SSspan 薩法特labeldiv
-            div
-        div
-    div
+        <div id="v2-ot" class="sub-section">
+            <div class="zone-card">
+                <h3>摩杜納</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-md-b"><label for="v2-md-b"><span class="rank rank-B">B</span> 水蛭王</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-md-a"><label for="v2-md-a"><span class="rank rank-A">A</span> 庫雷亞</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-md-s"><label for="v2-md-s"><span class="rank rank-S">S</span> 阿格里帕</label></div>
+                <h3>庫爾札斯中央高地</h3>
+                <div class="monster-row"><input type="checkbox" id="v2-ch-b"><label for="v2-ch-b"><span class="rank rank-B">B</span> 納烏爾</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-ch-a"><label for="v2-ch-a"><span class="rank rank-A">A</span> 馬拉克</label></div>
+                <div class="monster-row"><input type="checkbox" id="v2-ch-s"><label for="v2-ch-s"><span class="rank rank-S">S</span> 薩法特</label></div>
+            </div>
+        </div>
+    </div>
 
-    div id=v3 class=hunt-section
-        div class=zone-card
-            h3庫爾札斯西部高地h3
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 阿爾提克labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 克魯澤labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 米勒卡labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 盧芭labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1slabel for=v3-1sspan class=rank rank-SSspan 凱撒貝希摩斯labeldiv
-            h3阿巴拉提亞雲海h3
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 斯奎克labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 飛舞翼薩努瓦力labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 恩克拉多斯labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 西斯尤labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1slabel for=v3-1sspan class=rank rank-SSspan 極樂鳥labeldiv
-            h3德拉尼亞山麓地h3
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 骨頜彗星兵labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 提克斯塔labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 派拉斯特暴龍labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 雙足飛龍之王labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1slabel for=v3-1sspan class=rank rank-SSspan 神穆爾鳥labeldiv
-            h3德拉尼亞雲海h3
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 斯奇塔利斯labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 驚慌稻草龍labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 布涅labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 阿伽托斯labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1slabel for=v3-1sspan class=rank rank-SSspan 剛德瑞瓦labeldiv
-            h3德拉尼亞河谷地h3
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 翼肢鱟labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 布拉巨猿labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 機工兵斯利普金克斯labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 斯特拉斯labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1slabel for=v3-1sspan class=rank rank-SSspan 蒼白騎士labeldiv
-            h3魔大陸阿濟茲拉h3
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 利西達斯labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1blabel for=v3-1bspan class=rank rank-BBspan 全能機甲labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 坎帕提labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1alabel for=v3-1aspan class=rank rank-AAspan 惡臭狂花labeldiv
-            div class=monster-rowinput type=checkbox id=v3-1slabel for=v3-1sspan class=rank rank-SSspan 盧克洛塔labeldiv
-        div
-    div
+    <div id="v3" class="hunt-section">
+        <div class="zone-card">
+            <h3>庫爾札斯西部高地</h3>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 阿爾提克</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 克魯澤</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 米勒卡</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 盧芭</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1s"><label for="v3-1s"><span class="rank rank-S">S</span> 凱撒貝希摩斯</label></div>
+            <h3>阿巴拉提亞雲海</h3>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 斯奎克</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 飛舞翼薩努瓦力</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 恩克拉多斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 西斯尤</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1s"><label for="v3-1s"><span class="rank rank-S">S</span> 極樂鳥</label></div>
+            <h3>德拉尼亞山麓地</h3>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 骨頜彗星兵</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 提克斯塔</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 派拉斯特暴龍</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 雙足飛龍之王</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1s"><label for="v3-1s"><span class="rank rank-S">S</span> 神穆爾鳥</label></div>
+            <h3>德拉尼亞雲海</h3>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 斯奇塔利斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 驚慌稻草龍</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 布涅</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 阿伽托斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1s"><label for="v3-1s"><span class="rank rank-S">S</span> 剛德瑞瓦</label></div>
+            <h3>德拉尼亞河谷地</h3>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 翼肢鱟</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 布拉巨猿</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 機工兵斯利普金克斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 斯特拉斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1s"><label for="v3-1s"><span class="rank rank-S">S</span> 蒼白騎士</label></div>
+            <h3>魔大陸阿濟茲拉</h3>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 利西達斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1b"><label for="v3-1b"><span class="rank rank-B">B</span> 全能機甲</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 坎帕提</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1a"><label for="v3-1a"><span class="rank rank-A">A</span> 惡臭狂花</label></div>
+            <div class="monster-row"><input type="checkbox" id="v3-1s"><label for="v3-1s"><span class="rank rank-S">S</span> 盧克洛塔</label></div>
+        </div>
+    </div>
 
-    div id=v4 class=hunt-section
-        div class=zone-card
-            h3基拉巴尼亞邊區h3
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 影中暗雅彌尼labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 奧祖魯姆labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 奧迦斯labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 女王蜂labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1slabel for=v4-1sspan class=rank rank-SSspan 優曇婆羅花labeldiv
-            h3基拉巴尼亞山區h3
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 蛇僕螞蜓labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 布卡卜labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 弗克施泰因labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 熔骨炎蠍labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1slabel for=v4-1sspan class=rank rank-SSspan 爬骨怪龍labeldiv
-            h3基拉巴尼亞湖區h3
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 瑪涅斯labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 奇窪labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 馬希沙labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 泛光晶體labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1slabel for=v4-1sspan class=rank rank-SSspan 鹽和光labeldiv
-            h3紅玉海h3
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 劍豪刑具labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 姑獲鳥labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 船幽靈labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 鬼觀夢labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1slabel for=v4-1sspan class=rank rank-SSspan 巨大鰩labeldiv
-            h3延夏h3
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 大太labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 閃雷擊魚雷labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 象魔修羅labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 安迦達labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1slabel for=v4-1sspan class=rank rank-SSspan 伽馬labeldiv
-            h3太陽神草原h3
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 俱利摩labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1blabel for=v4-1bspan class=rank rank-BBspan 阿蘇黃labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 基里麥卡拉labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1alabel for=v4-1aspan class=rank rank-AAspan 碩姆labeldiv
-            div class=monster-rowinput type=checkbox id=v4-1slabel for=v4-1sspan class=rank rank-SSspan 兀魯忽乃朝魯labeldiv
-        div
-    div
+    <div id="v4" class="hunt-section">
+        <div class="zone-card">
+            <h3>基拉巴尼亞邊區</h3>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 影中暗雅彌尼</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 奧祖魯姆</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 奧迦斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 女王蜂</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1s"><label for="v4-1s"><span class="rank rank-S">S</span> 優曇婆羅花</label></div>
+            <h3>基拉巴尼亞山區</h3>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 蛇僕螞蜓</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 布卡卜</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 弗克施泰因</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 熔骨炎蠍</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1s"><label for="v4-1s"><span class="rank rank-S">S</span> 爬骨怪龍</label></div>
+            <h3>基拉巴尼亞湖區</h3>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 瑪涅斯</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 奇窪</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 馬希沙</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 泛光晶體</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1s"><label for="v4-1s"><span class="rank rank-S">S</span> 鹽和光</label></div>
+            <h3>紅玉海</h3>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 劍豪刑具</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 姑獲鳥</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 船幽靈</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 鬼觀夢</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1s"><label for="v4-1s"><span class="rank rank-S">S</span> 巨大鰩</label></div>
+            <h3>延夏</h3>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 大太</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 閃雷擊魚雷</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 象魔修羅</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 安迦達</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1s"><label for="v4-1s"><span class="rank rank-S">S</span> 伽馬</label></div>
+            <h3>太陽神草原</h3>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 俱利摩</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1b"><label for="v4-1b"><span class="rank rank-B">B</span> 阿蘇黃</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 基里麥卡拉</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1a"><label for="v4-1a"><span class="rank rank-A">A</span> 碩姆</label></div>
+            <div class="monster-row"><input type="checkbox" id="v4-1s"><label for="v4-1s"><span class="rank rank-S">S</span> 兀魯忽乃朝魯</label></div>
+        </div>
+    </div>
 
-    script
+    <script>
         function showVer(verId) {
-            document.querySelectorAll('.hunt-section').forEach(s = s.classList.remove('active'));
-            document.querySelectorAll('.tab-container button').forEach(b = b.classList.remove('active'));
+            document.querySelectorAll('.hunt-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-container button').forEach(b => b.classList.remove('active'));
             document.getElementById(verId).classList.add('active');
             document.getElementById('btn-' + verId).classList.add('active');
         }
 
         function showSub(subId) {
-            document.querySelectorAll('.sub-section').forEach(s = s.classList.remove('active'));
-            document.querySelectorAll('.sub-tab-container button').forEach(b = b.classList.remove('active'));
+            document.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.sub-tab-container button').forEach(b => b.classList.remove('active'));
             document.getElementById(subId).classList.add('active');
             document.getElementById('btn-' + subId).classList.add('active');
         }
 
-        const checkboxes = document.querySelectorAll('input[type=checkbox]');
-        checkboxes.forEach(cb = {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => {
             const status = localStorage.getItem(cb.id);
             if (status === 'true') cb.checked = true;
-            cb.addEventListener('change', () = {
+            cb.addEventListener('change', () => {
                 localStorage.setItem(cb.id, cb.checked);
             });
         });
-    script
-body
-html
+    </script>
+</body>
+</html>
